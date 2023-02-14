@@ -14,12 +14,12 @@ public class Player : MonoBehaviour
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
-        _scoreText.text = "Score : "+ScoreValue;
+        _scoreText.text = "Score : " + ScoreValue;
     }
 
     void Update()
     {
-        if(Input.GetAxis("Horizontal") != 0f || Input.GetAxis("Vertical") != 0f) 
+        if (Input.GetAxis("Horizontal") != 0f || Input.GetAxis("Vertical") != 0f)
         {
             _rigidbody.AddForce(Input.GetAxis("Horizontal") * 0.5f, 0f, Input.GetAxis("Vertical"));
         }
@@ -30,7 +30,9 @@ public class Player : MonoBehaviour
         if (other.gameObject.CompareTag("Target_Trigger"))
         {
             Destroy(other.gameObject);
+            UpdateScore();
         }
+       
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -38,21 +40,64 @@ public class Player : MonoBehaviour
         if (collision.gameObject.CompareTag("Target"))
         {
             Destroy(collision.gameObject);
+            UpdateScore();
         }
     }
 
-<<<<<<< Updated upstream
-=======
+
     private void UpdateScore()
     {
+    
+      
         ScoreValue++;
         PlayerPrefs.SetString("Score", "Score : " + ScoreValue.ToString());
         _scoreText.text = PlayerPrefs.GetString("Score");
-        Instantiate(_wallPrefab, _scenario.FirstWalls[0], Quaternion.identity);
-        if(ScoreValue == 8)
+       
+
+
+
+        int IndexPrefab = ScoreValue;
+        if (ScoreValue > 3)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            IndexPrefab = 0;
         }
+
+            Instantiate(_wallPrefab, _scenario.FirstWalls[IndexPrefab], Quaternion.identity);
+
+
+      
+
+        if (ScoreValue == 8)
+        {
+
+           
+            Debug.Log("Active Scene name is: " + SceneManager.GetActiveScene().name + "\nActive Scene index: " + SceneManager.GetActiveScene().buildIndex);
+            int Index = SceneManager.GetActiveScene().buildIndex;
+            int nextSceneIndex = Index + 1;
+            int maxSceneIndex = SceneManager.sceneCount;
+           
+           
+            if (Index == maxSceneIndex)
+                Index = 0;
+            else
+               Index = nextSceneIndex;
+
+
+            PlayerPrefs.SetString("Score", "Score : " + ScoreValue.ToString());
+
+            SceneManager.LoadScene(Index, LoadSceneMode.Single);
+
+            ScoreValue = PlayerPrefs.GetInt("Score");
+
+
+
+            Debug.Log("next Scene name is: " + nextSceneIndex);
+            Debug.Log("number of Scene name is: " + SceneManager.sceneCount);
+          
+        }
+          
+
+
     }
->>>>>>> Stashed changes
+
 }
