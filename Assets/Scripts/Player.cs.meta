@@ -3,7 +3,10 @@ guid: 40aef21d5be97044aa9e94706c71302f
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - _scoreText: {instanceID: 0}
+  - _scenario: {fileID: 11400000, guid: 008ef6932dca95e47878a6a183b8fa94, type: 2}
+  - _wallPrefab: {fileID: 7884454211581300893, guid: 81d2cf16b92ebf842a42c8f1fbb54125, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

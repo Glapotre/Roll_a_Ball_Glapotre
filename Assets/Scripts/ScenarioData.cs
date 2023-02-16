@@ -8,4 +8,8 @@ public class ScenarioData : ScriptableObject
 {
     public Vector3[] FirstWalls;
 
+
+
+
+
 }
