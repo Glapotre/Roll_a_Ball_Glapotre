@@ -12,12 +12,17 @@ public class Player : MonoBehaviour
     private int ScoreValue = 0;
     private float movementX;
     private float movementY;
+    // This will be appended to the name of the created entities and increment when each is created.
 
+    public float swingAngle = 30f;
 
+    private int HitValue = 0;
 
     [SerializeField] private TMP_Text _scoreText;
     [SerializeField] private ScenarioData _scenario;
     [SerializeField] private GameObject _wallPrefab;
+    //[SerializeField] private float _lazerSpeed = 10f;
+
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
@@ -48,6 +53,8 @@ public class Player : MonoBehaviour
         {
             Destroy(other.gameObject);
             UpdateScore();
+            Walls();
+
         }
 
     }
@@ -58,8 +65,42 @@ public class Player : MonoBehaviour
         {
             Destroy(collision.gameObject);
             UpdateScore();
+            Walls();
         }
     }
+
+    private void Walls()
+    {
+
+
+
+
+        HitValue++;
+        Debug.Log("Number hits is: " + HitValue);
+    
+
+        int IndexPrefab = HitValue;
+        if (HitValue > 7)
+        {
+            IndexPrefab = 0;
+        }
+
+
+
+
+
+        GameObject currentEntity = Instantiate(_wallPrefab, _scenario.FirstWalls[IndexPrefab], Quaternion.identity);
+
+        transform.position += Vector3.right * Time.deltaTime;
+
+        Debug.Log("Prefab number is: " + _scenario.FirstWalls[IndexPrefab]);
+
+    }
+
+
+
+
+
 
 
     private void UpdateScore()
@@ -70,16 +111,8 @@ public class Player : MonoBehaviour
         PlayerPrefs.SetString("Score", "Score : " + ScoreValue.ToString());
         _scoreText.text = PlayerPrefs.GetString("Score");
 
+      
 
-
-
-        int IndexPrefab = ScoreValue;
-        if (ScoreValue > 3)
-        {
-            IndexPrefab = 0;
-        }
-
-        Instantiate(_wallPrefab, _scenario.FirstWalls[IndexPrefab], Quaternion.identity);
 
 
 
@@ -104,7 +137,7 @@ public class Player : MonoBehaviour
 
             SceneManager.LoadScene(Index, LoadSceneMode.Single);
 
-          
+
 
 
 

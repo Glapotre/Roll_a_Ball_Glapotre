@@ -13,7 +13,13 @@ MonoBehaviour:
   m_Name: Scenario-1
   m_EditorClassIdentifier: 
   FirstWalls:
-  - {x: -3, y: 1, z: 3.8}
-  - {x: -5, y: 1, z: 5}
-  - {x: -5, y: 1, z: -5}
   - {x: 5, y: 1, z: -5}
+  - {x: -5, y: 1, z: 5}
+  - {x: 5, y: 1, z: 5}
+  - {x: -5, y: 1, z: -5}
+  - {x: 1, y: 1, z: -1}
+  - {x: -1, y: 1, z: 1}
+  - {x: 1, y: 1, z: 1}
+  - {x: -1, y: 1, z: -1}
+  prefabName: prefab
+  numberOfPrefabsToCreate: 4
