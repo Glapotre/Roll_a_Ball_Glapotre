@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
         _scoreText.text = "Score : " + ScoreValue;
     }
-
+    /*
     void Update()
     {
         if (Input.GetAxis("Horizontal") != 0f || Input.GetAxis("Vertical") != 0f)
@@ -36,7 +36,7 @@ public class Player : MonoBehaviour
             _rigidbody.AddForce(Input.GetAxis("Horizontal") * 0.5f, 0f, Input.GetAxis("Vertical"));
         }
     }
-
+    */
 
     void onMove(InputValue movementValue)
     {
